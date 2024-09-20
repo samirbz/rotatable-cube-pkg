@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotatable 3D Cube</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
+
+    #cube {
+      width: 200px;
+      height: 200px;
+      transform-style: preserve-3d;
+      animation: rotate 5s infinite linear;
+    }
+
+    #cube div {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-color: rgba(0, 128, 255, 0.6);
+      border: 2px solid #fff;
+    }
+
+    #front { transform: translateZ(100px); }
+    #back { transform: rotateY(180deg) translateZ(100px); }
+    #left { transform: rotateY(-90deg) translateZ(100px); }
+    #right { transform: rotateY(90deg) translateZ(100px); }
+    #top { transform: rotateX(90deg) translateZ(100px); }
+    #bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+    @keyframes rotate {
+      from {
+        transform: rotateX(0deg) rotateY(0deg);
+      }
+      to {
+        transform: rotateX(360deg) rotateY(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="cube">
+    <div id="front"></div>
+    <div id="back"></div>
+    <div id="left"></div>
+    <div id="right"></div>
+    <div id="top"></div>
+    <div id="bottom"></div>
+  </div>
+
+  <script type="module">
+    import init from './pkg/rotatable_cube.js';
+    init().then(() => {
+      console.log("Wasm module loaded");
+    });
+  </script>
+</body>
+</html>
